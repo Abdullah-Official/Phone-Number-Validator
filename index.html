@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>automata project</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="text/javascript">
+      const validate = () => {
+        let number = document.getElementById("phoneNumber").value;
+        // console.log(number);
+
+        let val = document.querySelector('input[name="number"]:checked').value;
+        let numPattern;
+        if (val == "pak") {
+          numPattern = /^((\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})$/;
+        } else if (val == "india") {
+          //examole :
+          // 8880344456
+          // + 918880344456
+          // + 91 8880344456
+          // + 91 - 8880344456
+          // 08880344456
+          // 918880344456
+          numPattern = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+        } else if (val == "usa") {
+          // example: 123 456 - 7890
+          // 123 - 456 7890
+          // (123) - 456 - 7890
+          // 123 456 7890
+          numPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        } else if (val == "germany") {
+          //example : (+49) 1739341284
+          // +49 17 39 34 12 84
+          // + 49(1739) 34 12 84
+          // + (49)(1739) 34 12 84
+          // + 49(1739) 34 - 12 - 84
+          numPattern = /\(?\+\(?49\)?[ ()]?([- ()]?\d[- ()]?){10}/;
+        }
+
+        if (numPattern.test(number)) {
+          document.getElementById("phoneNumber").style.background = "green";
+        } else {
+          document.getElementById("phoneNumber").style.background = "red";
+        }
+      };
+    </script>
+    
+  </head>
+  <body style="margin-top: 80px">
+    <div class="main">
+      <div class="form-group">
+        <h1 style="text-align: center">Phone Number Validator</h1>
+        <input type="text" name="number" id="phoneNumber" /><br />
+        <input type="radio" id="pkNumber" name="number" value="pak" />
+        <label for="pkNumber"> Pakistan</label><br />
+        <input type="radio" id="USA_number" name="number" value="usa" />
+        <label for="USA_number"> USA</label><br />
+        <input type="radio" id="germany_number" name="number" value="germany" />
+        <label for="germany_number"> Germany</label><br />
+        <input type="radio" id="indian_number" name="number" value="india" />
+        <label for="indian_number"> India</label><br />
+        <button type="button" class="btn" onclick="validate();">
+          Submit form
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
